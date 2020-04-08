@@ -10,8 +10,7 @@ router
   .route('/')
   .get(getBootcamps)
   .post(createBootcamp)
-  .put(updateBootcamp)
-  .delete(deleteBootcamp)
+  
 
 router
   .route('/:id')

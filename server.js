@@ -4,6 +4,7 @@ const dotenv = require("dotenv");
 const morgan = require("morgan");
 const colors = require("colors");
 const fileupload = require("express-fileupload");
+const cookieParser = require('cookie-parser');
 const errorHandler = require('./middleware/error');
 const connectDB = require('./config/db');
 // load env varaible
@@ -15,8 +16,13 @@ connectDB()
 // routes
 const bootcamps = require("./routes/bootcamp");
 const courses = require("./routes/courses");
+const auth = require("./routes/auth");
 
 const app = express()
+
+// cookie parser
+
+app.use(cookieParser())
 
 //body-parser
 app.use(express.json())
@@ -35,6 +41,7 @@ app.use(express.static(path.join(__dirname, 'public')))
 // mount router
 app.use('/api/v1/bootcamps', bootcamps)
 app.use('/api/v1/courses', courses)
+app.use('/api/v1/auth', auth)
 
 // call errorHandler
 app.use(errorHandler)
